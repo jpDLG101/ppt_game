@@ -6,7 +6,7 @@ npx create-expo-app@latest rps-game --template blank
 
 La app usa el template "blank" de Expo, que da una estructura mínima de proyecto React Native lista para correr y personalizar.
 
-Esta aplicación replica la metodología del curso "Integración de seguridad informática en redes y sistemas de software" (repo de referencia: `temperatureConverter`), aplicada a un juego de Piedra, Papel o Tijeras (jugador humano vs. computadora).
+Esta aplicación replica la metodología del curso "Integración de seguridad informática en redes y sistemas de software", aplicada a un juego de Piedra, Papel o Tijeras (jugador humano vs. computadora).
 
 Este README se va actualizando lección a lección a medida que se avanza en el curso (`docs/Curso-Piedra-Papel-o-Tijeras.md`).
 
