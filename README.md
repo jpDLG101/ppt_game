@@ -8,8 +8,6 @@ La app usa el template "blank" de Expo, que da una estructura mínima de proyect
 
 Esta aplicación replica la metodología del curso "Integración de seguridad informática en redes y sistemas de software", aplicada a un juego de Piedra, Papel o Tijeras (jugador humano vs. computadora).
 
-Este README se va actualizando lección a lección a medida que se avanza en el curso (`docs/Curso-Piedra-Papel-o-Tijeras.md`).
-
 ## ¿Qué es React Native?
 React Native es un framework para construir aplicaciones móviles usando JavaScript y React. Permite crear apps con apariencia nativa para iOS y Android desde una sola base de código.
 
