@@ -23,6 +23,10 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     textAlign: 'center',
-    paddingVertical: 10,
+    paddingVertical: 20,
+    backgroundColor: '#4a148c',
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 25
   },
 });
