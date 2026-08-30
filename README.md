@@ -8,8 +8,6 @@ La app usa el template "blank" de Expo, que da una estructura mínima de proyect
 
 Esta aplicación replica la metodología del curso "Integración de seguridad informática en redes y sistemas de software", aplicada a un juego de Piedra, Papel o Tijeras (jugador humano vs. computadora).
 
-Este README se va actualizando lección a lección a medida que se avanza en el curso (`docs/Curso-Piedra-Papel-o-Tijeras.md`).
-
 ## ¿Qué es React Native?
 React Native es un framework para construir aplicaciones móviles usando JavaScript y React. Permite crear apps con apariencia nativa para iOS y Android desde una sola base de código.
 
@@ -50,6 +48,31 @@ TDD es un enfoque de desarrollo donde primero se escriben los tests y después s
 - **View** (`screens/` + `App.js`): es lo que el usuario ve y toca. La pantalla del juego renderiza los botones y el resultado, sin lógica de negocio propia.
 - **Controller** (`hooks/`): maneja el flujo entre la View y el Model. El custom hook `useRockPaperScissors` recibe la jugada del usuario, invoca la lógica del juego, y actualiza el estado que la pantalla muestra.
 
+### Diagrama de secuencia UML del flujo de la aplicación
+
+```mermaid
+sequenceDiagram
+    actor User
+    participant RPSScreen
+    participant useRockPaperScissors
+    participant ComputerPlayerManager
+    participant GameManager
+    participant ScoreManager
+
+    User->>RPSScreen: toca un botón (Piedra/Papel/Tijeras)
+    RPSScreen->>useRockPaperScissors: play(playerChoice)
+    useRockPaperScissors->>ComputerPlayerManager: chooseMove()
+    ComputerPlayerManager-->>useRockPaperScissors: computerMove (MoveVO)
+    useRockPaperScissors->>GameManager: play(playerMove, computerMove)
+    GameManager-->>useRockPaperScissors: RoundResultVO (winner)
+    useRockPaperScissors->>ScoreManager: update(score, winner)
+    ScoreManager-->>useRockPaperScissors: nuevo ScoreVO
+    useRockPaperScissors->>RPSScreen: actualiza playerMove, computerMove, winner, score
+    RPSScreen-->>User: muestra jugada de la compu y resultado de la ronda
+```
+
+Este diagrama usa sintaxis Mermaid para representar la interacción entre el usuario, la pantalla, la lógica del controlador y la capa de modelo en un flujo de secuencia estilo UML.
+
 ## Correr los tests
 
 ```
@@ -62,18 +85,64 @@ npm test
 - Expo SDK: ~54.0.36
 - React Native: 0.81.5
 
+Se usó Expo SDK 54 porque es la versión configurada actualmente en las dependencias del proyecto y es compatible con el stack moderno de Expo/React Native que usa esta app.
+
 ## Correr la aplicación
+
+Instalar dependencias:
 
 ```
 npm install
+```
+
+Levantar el servidor de desarrollo de Expo:
+
+```
 npm start
 ```
 
-## Correr en emulador Android / simulador iOS / Expo Go / web
+Esto abre las Expo developer tools en el navegador y da un código QR para probar en un dispositivo.
+
+## Correr en emulador de Android Studio
+
+1. Abrir Android Studio.
+2. Levantar un emulador de Android.
+3. En la terminal, correr:
 
 ```
 npm run android
+```
+
+Expo se conecta al emulador que esté corriendo y levanta la app ahí.
+
+## Correr en simulador de Xcode
+
+1. Abrir Xcode.
+2. Levantar un simulador de iOS.
+3. En la terminal, correr:
+
+```
 npm run ios
-npm start   # y después escanear el QR con Expo Go
+```
+
+Expo compila y levanta la app en el simulador de iOS.
+
+## Correr con Expo Go
+
+1. Instalar Expo Go en el celular desde App Store o Google Play.
+2. Asegurarse de que el celular y la computadora estén en la misma red.
+3. Correr:
+
+```
+npm start
+```
+
+4. Escanear el código QR que aparece en la terminal o el navegador con Expo Go.
+
+## Notas
+
+Si además querés abrir la app en el navegador, podés correr:
+
+```
 npm run web
 ```
