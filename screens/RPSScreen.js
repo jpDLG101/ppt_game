@@ -10,6 +10,12 @@ const MOVE_ICONS = {
   SCISSORS: 'hand-scissors',
 };
 
+const MOVE_LABELS = {
+  ROCK: 'Piedra',
+  PAPER: 'Papel',
+  SCISSORS: 'Tijeras',
+};
+
 const RPSScreen = () => {
   const { computerMove, winner, score, play } = useRockPaperScissors();
 
@@ -18,6 +24,7 @@ const RPSScreen = () => {
       <View style={styles.buttonRow}>
       <Button
         id="rockButton"
+        testID="rockButton"
         mode="contained"
         buttonColor="#ffffff"
         onPress={() => play('ROCK')}
@@ -29,6 +36,7 @@ const RPSScreen = () => {
       </Button>
       <Button
         id="paperButton"
+        testID="paperButton"
         mode="contained"
         buttonColor="#ffffff"
         onPress={() => play('PAPER')}
@@ -40,6 +48,7 @@ const RPSScreen = () => {
       </Button>
       <Button
         id="scissorsButton"
+        testID="scissorsButton"
         mode="contained"
         buttonColor="#ffffff"
         onPress={() => play('SCISSORS')}
@@ -53,6 +62,8 @@ const RPSScreen = () => {
       <Text style={styles.vsText}>VS</Text>
       <View style={styles.computerCard}>
         <FontAwesome5
+          testID="computerMoveIcon"
+          accessibilityLabel={`Jugada de la computadora: ${computerMove ? MOVE_LABELS[computerMove.value] : 'sin jugar'}`}
           name={computerMove ? MOVE_ICONS[computerMove.value] : 'question-circle'}
           size={64}
           color="#bd2525"
@@ -62,19 +73,19 @@ const RPSScreen = () => {
       <View style={styles.scoreRow}>
         <View style={styles.scoreColumn}>
           <Text style={styles.scoreLabel}>Jugador</Text>
-          <Text style={styles.scoreValue}>{score.playerWins}</Text>
+          <Text testID="playerScore" style={styles.scoreValue}>{score.playerWins}</Text>
         </View>
         <View style={styles.scoreDivider} />
         <View style={styles.scoreColumn}>
           <Text style={styles.scoreLabel}>Computadora</Text>
-          <Text style={styles.scoreValue}>{score.computerWins}</Text>
+          <Text testID="computerScore" style={styles.scoreValue}>{score.computerWins}</Text>
         </View>
       </View>
-      <Text style={styles.tiesText}>Empates: {score.ties}</Text>
+      <Text testID="tiesText" style={styles.tiesText}>Empates: {score.ties}</Text>
 
       {winner && (
         <View style={styles.resultPill}>
-          <Text style={styles.resultText}>
+          <Text testID="resultText" style={styles.resultText}>
             {winner === 'PLAYER' && '¡Ganaste!'}
             {winner === 'COMPUTER' && 'Ganó la compu'}
             {winner === 'TIE' && 'Empate'}
